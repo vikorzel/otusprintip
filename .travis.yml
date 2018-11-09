@@ -11,7 +11,9 @@ script:
 - doxygen ./Doxyfile
 - cd html
 - git add --all
+- set -e
 - git commit -m "Travis AutoCommit"
+- set +e
 - git push --force https://$GITHUB_TOKEN@github.com/vikorzel/vikorzel.github.io.git
 - cd ..
 
