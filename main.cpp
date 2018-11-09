@@ -38,6 +38,10 @@ template<> struct is_char<unsigned char>{
 template<typename ... Types>
 struct is_same_types;
 
+/*!
+ \brief Проверка списка типов на идентичность
+        Шаблон проверяет все ли переданные в него типы одинаковы
+*/
 template<typename T, typename U, typename ... Types>
 struct is_same_types<T,U,Types...>{
     static const bool value =   (is_same_types<T,U>::value)&&
