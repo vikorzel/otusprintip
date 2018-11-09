@@ -10,8 +10,6 @@ script:
 - cmake .
 - cmake --build .
 - cmake --build . --target package
-- git clone https://github.com/vikorzel/vikorzel.github.io.git html
-- doxygen Doxyfile
 
 deploy:
   provider: script
