@@ -7,8 +7,6 @@ script:
 - cmake .
 - cmake --build .
 - cmake --build . --target package
-
-after_success:
 - cd "$TRAVIS_BUILD_DIR"
 - git clone https://github.com/vikorzel/vikorzel.github.io.git html
 - doxygen ./Doxyfile
