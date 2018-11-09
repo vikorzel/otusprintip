@@ -9,6 +9,7 @@
 
 /*!
  \brief Проверка на тип char
+        
         Шаблон проверяет является ли переданный в него тип (unsigned) char или нет
 */
 template<typename> struct is_char{
@@ -17,6 +18,7 @@ template<typename> struct is_char{
 
 /*!
  \brief Проверка на тип char
+        
         Шаблон проверяет является ли переданный в него тип (unsigned) char или нет
 */
 template<> struct is_char<char>{
@@ -25,7 +27,8 @@ template<> struct is_char<char>{
 
 /*!
  \brief Проверка на тип char
-        Шаблон проверяет является ли переданный в него тип (unsigned) char или нет
+       
+       Шаблон проверяет является ли переданный в него тип (unsigned) char или нет
 */
 template<> struct is_char<unsigned char>{
     static const bool value = true;
@@ -33,6 +36,7 @@ template<> struct is_char<unsigned char>{
 
 /*!
  \brief Проверка списка типов на идентичность
+        
         Шаблон проверяет все ли переданные в него типы одинаковы
 */
 template<typename ... Types>
@@ -40,6 +44,7 @@ struct is_same_types;
 
 /*!
  \brief Проверка списка типов на идентичность
+        
         Шаблон проверяет все ли переданные в него типы одинаковы
 */
 template<typename T, typename U, typename ... Types>
@@ -51,6 +56,7 @@ struct is_same_types<T,U,Types...>{
 
 /*!
  \brief Проверка списка типов на идентичность
+        
         Шаблон проверяет все ли переданные в него типы одинаковы
 */
 template<typename T, typename U>
@@ -60,6 +66,7 @@ struct is_same_types<T,U>{
 
 /*!
  \brief Проверка на наличие get_allocator
+        
         Проверяет наличие у переданного типа метода get_allocator
 */
 template<typename T>
