@@ -1,10 +1,7 @@
 language: cpp
 compiler: clang
 before_script:
-- sudo apt-get update
-- echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list.d/xenial.list
-- sudo apt-get update
-- sudo apt install libspdlog-dev doxygen -y
+- sudo apt install doxygen -y
 script:
 - cmake .
 - cmake --build .
@@ -25,5 +22,3 @@ deploy:
   skip_cleanup: true
   script:  
   - curl -T print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uvikorzel:$BINTRAY_API_KEY "https://api.bintray.com/content/otushomeworks/otushw/homework/$TRAVIS_BUILD_NUMBER/otusprintip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty,bionic;deb_component=main;deb_architecture=amd64;publish=1"
-
-
