@@ -11,9 +11,9 @@ script:
 - doxygen ./Doxyfile
 - cd html
 - if ! git diff-index --quiet HEAD --; then
-  git add --all
-  git commit -m "Travis AutoCommit"
-  git push --force https://$GITHUB_TOKEN@github.com/vikorzel/vikorzel.github.io.git    
+  git add --all &&
+  git commit -m "Travis AutoCommit" &&
+  git push --force https://$GITHUB_TOKEN@github.com/vikorzel/vikorzel.github.io.git;    
  fi
 - cd ..
 
