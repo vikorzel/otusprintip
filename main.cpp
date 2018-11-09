@@ -6,6 +6,11 @@
 #include <tuple>
 #include <type_traits>
 
+
+/*!
+ \brief Проверка на тип char
+        Шаблон проверяет является ли переданный в него тип (unsigned) char или нет
+*/
 template<typename> struct is_char{
     static const bool value = false;
 };
