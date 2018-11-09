@@ -4,7 +4,7 @@ before_script:
 - sudo apt-get update
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list.d/xenial.list
 - sudo apt-get update
-- sudo apt install libspdlog-dev -y
+- sudo apt install libspdlog-dev doxygen -y
 script:
 - cmake .
 - cmake --build .
