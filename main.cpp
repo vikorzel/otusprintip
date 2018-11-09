@@ -59,7 +59,7 @@ struct is_same_types<T,U>{
 };
 
 /*!
- \brief Проверка является ли переданный тип контейнером
+ \brief Проверка на наличие get_allocator
         Проверяет наличие у переданного типа метода get_allocator
 */
 template<typename T>
