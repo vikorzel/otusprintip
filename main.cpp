@@ -15,14 +15,26 @@ template<typename> struct is_char{
     static const bool value = false;
 };
 
+/*!
+ \brief Проверка на тип char
+        Шаблон проверяет является ли переданный в него тип (unsigned) char или нет
+*/
 template<> struct is_char<char>{
     static const bool value = true;
 };
 
+/*!
+ \brief Проверка на тип char
+        Шаблон проверяет является ли переданный в него тип (unsigned) char или нет
+*/
 template<> struct is_char<unsigned char>{
     static const bool value = true;
 };
 
+/*!
+ \brief Проверка списка типов на идентичность
+        Шаблон проверяет все ли переданные в него типы одинаковы
+*/
 template<typename ... Types>
 struct is_same_types;
 
@@ -33,11 +45,19 @@ struct is_same_types<T,U,Types...>{
                                 (is_same_types<U, Types...>::value);
 };
 
+/*!
+ \brief Проверка списка типов на идентичность
+        Шаблон проверяет все ли переданные в него типы одинаковы
+*/
 template<typename T, typename U>
 struct is_same_types<T,U>{
     static const bool value = std::is_same<T,U>::value;
 };
 
+/*!
+ \brief Проверка является ли переданный тип контейнером
+        Проверяет наличие у переданного типа метода get_allocator
+*/
 template<typename T>
 struct is_container{
     template<typename,typename> class checker;
@@ -92,28 +112,6 @@ addr_as_str(T addr){
     }
     return ss.str();
 }
-/*
-
-
-template<typename T>
-std::string addr_as_str(std::list<T> ip_list){
-    std::stringstream ss;
-    for(auto& element: ip_list){
-        if(ss.rdbuf()->in_avail() != 0) ss<<".";
-        ss<<element;
-    }
-    return ss.str();
-}
-
-template<typename T>
-std::string addr_as_str(std::vector<T> ip_list){    
-    std::stringstream ss;
-    for(auto& element: ip_list){
-        if(ss.rdbuf()->in_avail() != 0) ss<<".";
-        ss<<element;
-    }
-    return ss.str();
-}*/
 
 template<std::size_t I = 0, typename... Tp>
 typename std::enable_if<I == sizeof...(Tp), void>::type
