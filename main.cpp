@@ -34,6 +34,12 @@ template<> struct is_char<unsigned char>{
     static const bool value = true;
 };
 
+template <class T>
+constexpr bool is_char_v = is_char<T>::value;
+
+template< class T >
+constexpr bool is_integral_v = std::is_integral<T>::value;
+
 /*!
  \brief Проверка списка типов на идентичность
         
@@ -42,6 +48,12 @@ template<> struct is_char<unsigned char>{
 template<typename ... Types>
 struct is_same_types;
 
+template<typename ... Types>
+constexpr bool is_same_types_v = is_same_types<Types...>::value;
+
+template<typename ... Types>
+constexpr bool is_same_v = std::is_same<Types...>::value;
+
 /*!
  \brief Проверка списка типов на идентичность
         
@@ -49,9 +61,9 @@ struct is_same_types;
 */
 template<typename T, typename U, typename ... Types>
 struct is_same_types<T,U,Types...>{
-    static const bool value =   (is_same_types<T,U>::value)&&
-                                (is_same_types<T,Types...>::value)&&
-                                (is_same_types<U, Types...>::value);
+    static const bool value =   (is_same_types_v<T,U>)&&
+                                (is_same_types_v<T,Types...>)&&
+                                (is_same_types_v<U, Types...>);
 };
 
 /*!
@@ -61,7 +73,7 @@ struct is_same_types<T,U,Types...>{
 */
 template<typename T, typename U>
 struct is_same_types<T,U>{
-    static const bool value = std::is_same<T,U>::value;
+    static const bool value = is_same_v<T,U>;
 };
 
 /*!
@@ -85,13 +97,13 @@ struct is_container{
 
 
 template<typename T>
-typename std::enable_if<is_char<typename std::remove_cv<T>::type>::value,std::string>::type 
+typename std::enable_if_t<is_char_v<typename std::remove_cv_t<T>>,std::string> 
 addr_as_str(T* str){
     return std::string(str);
 }
 
 template<typename T>
-typename std::enable_if<std::is_integral<T>::value,std::string>::type 
+typename std::enable_if_t<is_integral_v<T>,std::string> 
 addr_as_str(T addr){
     std::stringstream ss;
     size_t typesize = sizeof(T);
@@ -108,7 +120,7 @@ std::string addr_as_str(std::basic_string<T> str){
 }
 
 template<typename T>
-typename std::enable_if<is_container<T>::value,std::string>::type
+typename std::enable_if_t<is_container<T>::value,std::string>
 addr_as_str(T addr){
     std::stringstream ss;
     bool is_first = true;
@@ -125,12 +137,12 @@ addr_as_str(T addr){
 }
 
 template<std::size_t I = 0, typename... Tp>
-typename std::enable_if<I == sizeof...(Tp), void>::type
+typename std::enable_if_t<I == sizeof...(Tp), void>
 each_in_tuple(std::stringstream&, std::tuple<Tp...>&)
 { }
 
 template<std::size_t I = 0, typename... Tp>
-typename std::enable_if<I < sizeof...(Tp), void>::type
+typename std::enable_if_t<I < sizeof...(Tp), void>
 each_in_tuple(std::stringstream& ss, std::tuple<Tp...>& t){
     if(I != 0 ) ss<<".";
     ss << std::get<I>(t);

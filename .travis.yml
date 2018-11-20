@@ -7,18 +7,17 @@ script:
 - cmake .
 - cmake --build .
 - cmake --build . --target package
-- git clone https://github.com/vikorzel/vikorzel.github.io.git html
 - doxygen ./Doxyfile
-- cd html
-- if ! git diff-index --quiet HEAD --; then
-  git add --all &&
-  git commit -m "Travis AutoCommit" &&
-  git push --force https://$GITHUB_TOKEN@github.com/vikorzel/vikorzel.github.io.git;    
- fi
-- cd ..
 
 deploy:
-  provider: script
+  - provider: script
   skip_cleanup: true
   script:  
-  - curl -T print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uvikorzel:$BINTRAY_API_KEY "https://api.bintray.com/content/otushomeworks/otushw/homework/$TRAVIS_BUILD_NUMBER/otusprintip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty,bionic;deb_component=main;deb_architecture=amd64;publish=1"
+  curl -T print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -uvikorzel:$BINTRAY_API_KEY "https://api.bintray.com/content/otushomeworks/otushw/homework/$TRAVIS_BUILD_NUMBER/otusprintip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty,bionic;deb_component=main;deb_architecture=amd64;publish=1"
+  - provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: html
+  keep-history: true
+  on:
+    branch: master
